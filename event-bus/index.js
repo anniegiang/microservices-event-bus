@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const events = [];
+const events = []; // cache events
 
 app.post("/events", async (req, res) => {
   const event = req.body;
