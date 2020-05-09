@@ -1,23 +1,20 @@
 import React from "react";
 
 const Comments = ({ comments }) => {
-  const moderateContent = (comment) => {
-    const { id, content, status } = comment;
-    let text;
-    switch (status) {
-      case "pending":
-        text = "This comment is awaiting moderation";
-        break;
+  const displayComments = comments.map((comment) => {
+    let content;
+    switch (comment.status) {
       case "rejected":
-        text = "This comment was rejected";
+        content = "Comment is rejected";
+        break;
+      case "pending":
+        content = "Comment is pending";
         break;
       default:
-        text = content;
-        break;
+        content = comment.content;
     }
-    return <div key={id}>{text}</div>;
-  };
-  const displayComments = comments.map((comment) => moderateContent(comment));
+    return <li key={comment.id}>{content}</li>;
+  });
 
   return <div className="comments">{displayComments}</div>;
 };

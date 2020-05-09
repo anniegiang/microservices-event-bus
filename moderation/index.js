@@ -8,17 +8,20 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/events", async (req, res) => {
-  const { content, status } = req.body.data;
-  let newStatus;
-  if (content.includes("orange")) {
-    newStatus = "rejected";
-  } else {
-    newStatus = "approved";
+  const { type, data } = req.body;
+  if (type === "CommentCreated") {
+    const status = data.content.includes("orange") ? "rejected" : "approved";
+    await axios.post("http://localhost:4001/events", {
+      type: "CommentModerated",
+      data: {
+        id: data.id,
+        postId: data.postId,
+        content: data.content,
+        status,
+      },
+    });
   }
-  req.body.data.status = newStatus;
-  await axios.post("http://localhost:4002/events", req.body);
-  console.log(req.body);
-  res.send(req.body);
+  res.send({});
 });
 
 app.listen("4003", () => {
