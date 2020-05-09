@@ -13,20 +13,19 @@ const postStyle = {
 const Posts = () => {
   const [posts, setPosts] = useState({});
 
-  const getPosts = async () => {
-    const res = await axios.get("http://localhost:4000/posts");
-    setPosts(res.data);
-  };
-
   useEffect(() => {
+    const getPosts = async () => {
+      const res = await axios.get("http://localhost:4002/posts");
+      setPosts(res.data);
+    };
     getPosts();
-  }, [posts]);
+  }, []);
 
   const renderPosts = Object.values(posts).map((post) => (
     <div className="post" key={post.id} style={postStyle}>
       <h3>{post.title}</h3>
       <CreateComment postId={post.id} />
-      <Comments postId={post.id} />
+      <Comments comments={post.comments} />
     </div>
   ));
 
