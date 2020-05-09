@@ -8,10 +8,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/events", async (req, res) => {
-  const { event } = req.body;
+  const event = req.body;
 
-  await axios.post("http://localhost:4000/events", { event });
-  await axios.post("http://localhost:4001/events", { event });
+  await axios.post("http://localhost:4000/events", event);
+  await axios.post("http://localhost:4001/events", event);
 
   res.send({ status: "OK" });
 });

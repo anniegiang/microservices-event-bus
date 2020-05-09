@@ -20,17 +20,16 @@ app.post("/posts", async (req, res) => {
   posts[id] = { id, title };
 
   await axios.post("http://localhost:4005/events", {
-    event: {
-      type: "PostCreated",
-      data: posts[id],
-    },
+    type: "PostCreated",
+    data: posts[id],
   });
 
   res.status(201).send(posts[id]);
 });
 
 app.post("/events", (req, res) => {
-  res.send(req.body.event.type);
+  console.log("Event: ", req.body.type);
+  res.send(req.body.type);
 });
 
 app.listen(4000, () => {
