@@ -11,7 +11,7 @@ build:
     - image: annieg4123/client
       context: client
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.js"
@@ -19,7 +19,7 @@ build:
     - image: annieg4123/comments
       context: comments
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "*.js"
@@ -27,7 +27,7 @@ build:
     - image: annieg4123/event-bus
       context: event-bus
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "*.js"
@@ -35,7 +35,7 @@ build:
     - image: annieg4123/moderation
       context: moderation
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "*.js"
@@ -43,7 +43,7 @@ build:
     - image: annieg4123/posts
       context: posts
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "*.js"
@@ -51,7 +51,7 @@ build:
     - image: annieg4123/queries
       context: queries
       docker:
-        dockerFile: Dockerfile
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: "*.js"
