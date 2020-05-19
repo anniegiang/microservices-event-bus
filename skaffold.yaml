@@ -1,6 +1,58 @@
 apiVersion: skaffold/v2alpha3
 kind: Config
-deply:
+deploy:
   kubectl:
     manifests:
       - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: annieg4123/client
+      context: client
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js"
+            dest: .
+    - image: annieg4123/comments
+      context: comments
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: annieg4123/event-bus
+      context: event-bus
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: annieg4123/moderation
+      context: moderation
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: annieg4123/posts
+      context: posts
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: annieg4123/queries
+      context: queries
+      docker:
+        dockerFile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
